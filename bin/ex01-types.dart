@@ -79,11 +79,66 @@ typeCheck() {
   print("message is not int ? : ${message is! int}");
 }
 
+typeInference() {
+  //  var, dynamic
+  //  var: 데이터 할당시 타입 결정되고 고정
+  //  dynamic: 실행 중 마음대로 타입이 결정되고 변경
+  var name = "홍길동"; //  String 타입으로 추론되고 고정
+  // name = 42;  //  다른 데이터 타입으로 변경될 수 없음
+  var age = 42; //  int 타입으로 추론
+  print("name: $name -> ${name.runtimeType}");
+  print("age: $age -> ${age.runtimeType}");
+  
+  //  동적 타입
+  dynamic value = "홍길동";  //  모든 타입이 할당되고 고정되지 않음
+  print("value: $value -> ${value.runtimeType}");
+  value = 42; //  int
+  print("value: $value -> ${value.runtimeType}");
+  value = 7 > 3;  //  boolean
+  print("value: $value -> ${value.runtimeType}");
+  value = [1, 2, 3, 4, 5];  //  List<int>
+  print("value: $value -> ${value.runtimeType}");
+}
+
+nullSafety() {
+  print("Null Safety\t-----");
+
+  //  기본적으로는 null은 변수에 할당이 불가
+  // String val = null;
+  String? nullableName = null;  //  ? -> nullable 변수 표시
+  print("nullableName: $nullableName");
+
+  // String Name = null; //  오류 발생
+  String name = "홍길동";
+  print("name: $name");
+
+  //  ! 연산자 -> 변수가 null이 아님을 확신함 -> 주의해서 사용
+  print("name: ${name!.length}");
+}
+
+constants() {
+  print("Constants\t-----");
+
+  //  const: 컴파일 타임 상수
+  const double PI = 3.14159;
+
+  //  final: 런타임 상수
+  final String today = DateTime.now().toString();
+  final DateTime someday = DateTime(2012, 9, 24);
+
+  print("PI: $PI");
+  print("Today: $today");
+  print("Someday: $someday");
+}
 
 main() {
   // numbers();  //  숫자형 예제
   // strings();  //  문자형 예제
   // booleans(); //  논리형 예제
   
-  typeCheck();  //  변수 타입 체크
+  // typeCheck();  //  변수 타입 체크
+  // typeInference();  //  타입 추론
+
+  // nullSafety(); //  널 안전성
+  constants();  //  상수
 }
