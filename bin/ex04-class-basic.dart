@@ -70,7 +70,37 @@ testClassEx() {
   person.introduce(); //  퍼블릭 메서드 호출
 }
 
+//  명명된 생성자
+//  dart는 기본 생성자는 1개만 허용됨
+//  다른 언어처럼 생성자 오버로딩이 불가
+class Point {
+  //  인스턴스 변수
+  double x, y;
+
+  //  기본 생성자
+  Point(this.x, this.y);
+
+  //  명명된 생성자 : 초기화 리스트 사용
+  Point.origin()
+      : x = 0,
+        y = 0;
+
+  Point.fromJson(Map<String, double> json)
+      : x = json['x'] ?? 0, y = json['y'] ?? 0;
+}
+
+testClassNamed() {
+  var p1 = Point(2.0, 3.0); //  기본 생성자 사용
+  var p2 = Point.origin();  //  명명된 생성자 사용
+  var p3 = Point.fromJson({"x": 10, "y": 20});  //  명명된 생성자 사용
+
+  print("p1: (${p1.x}, ${p1.y})");
+  print("p2: (${p2.x}, ${p2.y})");
+  print("p3: (${p3.x}, ${p3.y})");
+}
+
 main() {
   // testClass();  //  클래스의 인스턴스 생성과 메서드 호출
-  testClassEx();  //  private 멤버와 메서드
+  // testClassEx();  //  private 멤버와 메서드
+  testClassNamed();
 }
