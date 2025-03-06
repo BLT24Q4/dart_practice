@@ -85,6 +85,7 @@ mixin Timer {
   }
 }
 
+//  with : mixin 사용 키워드
 class MyApp with Logger, Timer {
   //  Future 객체: 실행을 지연시킴(나중에 수행)
   Future<void> run() async {
